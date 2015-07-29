@@ -1,0 +1,60 @@
+<head>
+    <meta charset="utf-8">
+	
+	<link href = "http://fonts.googleapis.com/css?family=Corben:bold" rel = "stylesheet" type = "text/css">
+    <link href = "http://fonts.googleapis.com/css?family=Nobile" rel = "stylesheet" type = "text/css">
+	
+    <title>exp_cs</title>
+</head>
+<body>
+	
+    <h1>A Simple Decentralized Coordination Experiment</h1>
+    
+	<div id="canvasContainer">
+        {{> canvas}}
+    </div>      
+	
+	{{> progressBars}}
+	 
+    <div style = " position: absolute; padding-top:0%; display: block; top: 89.5%; left: 38.5%;">
+        {{> selectColor}}
+    </div>
+	
+	<div style = " position: absolute; padding-top:0%; display: block; top: 77.5%; left: 75.0%">
+        {{> adminControls}}
+    </div>
+	
+    {{> payoutInformation}} 
+   
+	{{> potentialPayoutInformation}}
+   
+	{{> potentialPayoutInformation1}}
+	
+	{{> potentialPayoutInformation2}}
+   
+    {{> currentName}}
+	
+	<div id = "communicationInstructionsContainer">
+		{{> communicationInstructions}}
+	</div>
+	
+	<div id = "chatContainer">
+		{{> chatBox}}
+	</div>
+	
+	<div style = "position: absolute; padding-top:0%; display: block; top: 10%; left: 75%;">
+        {{> loginButtons}}
+    </div>
+	
+	{{> waitForNextExperimentStatus}}
+	
+	{{> signInStatus}}
+	
+	{{> preSessionCountdown}}
+	
+	{{> gameInProgressStatus}}
+	
+	{{> gameOutcomeStatus}}
+	
+	{{> sessionPayoutInformation}}
+</body>

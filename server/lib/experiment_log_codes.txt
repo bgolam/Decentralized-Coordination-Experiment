@@ -1,0 +1,69 @@
+Four-letter-plus-one-digit codes are used to distinguish between different types of records 
+within the experiment log.  
+
+=====================================================================================
+Code	-	Explanation
+=====================================================================================
+EXPS1	-	Experiment started
+EXPT2	-	Experiment terminated
+
+PYEA1	- 	Actual experiment payouts
+PYSP2	-	Potential session payouts
+PYSA3	- 	Actual session payouts
+
+ITES1	-	Initialization of experiment started
+ITET2	- 	Initialization of experiment completed
+
+ITZS1	- 	Initialization of session started
+ITZT2	- 	Initialization of session terminated
+
+SESS1	- 	Session started
+SEST2	- 	Session terminated
+SESO3	- 	Session outcome (consensus was (not) reached)
+
+PRMM1	- 	Communication (messaging) parameters
+PRMC2	-	Communication cost parameters
+PRMI3	- 	Incentive conflict parameters
+
+PART1	- 	Experiment participants
+
+NDNM1	- 	Nodes-to-names correspondence
+
+ADJM1	- 	Network adjacency matrix
+
+PRNM1	- 	Participants-to-names correspondence
+
+COLA1	- 	Initial colors assignment
+COLC2	- 	Color counts
+CRQM3	- 	Color-update request made
+CRQP4	- 	Color-update request processed
+CRQC5	-	Color-update request cancelled
+
+ANOI1	- 	Anonymization of colors information
+
+MSGR1	-	Request for sending a message has been received
+MSGS2	-	Message has been successfully sent
+MSGF3	- 	Sending of message has failed
+
+USLI1	- 	User has logged in
+USLO2	-	User has logged out
+=====================================================================================
+
+The format of an individual record in the experiment log is as follows. 
+
+###
+[Timestamp]			// Single line
+[Code]				// Single line	
+[Contents]			// Zero, one, or more lines
+###
+
+The [Timestamp] is of the format hh:mm:ss.msc ("msc" stands for milliseconds; it always has three digits).
+
+The "###" serve as record delimiters. Two consecutive records will look like
+
+###
+[Record 1]
+###
+###
+[Record 2]
+###

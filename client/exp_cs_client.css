@@ -1,0 +1,81 @@
+/*Body Attributes*/
+body {
+    overflow:hidden;
+	background:lightgray;
+}
+
+/*Header 1 Attributes*/
+h1 {
+    text-shadow: 1px 1px 1px #ccc;
+    box-shadow: 0 0 .125em 0.125em #ccc;
+    background-color: beige;
+    color: black;
+    text-indent: 11vw;
+    font-size: 3.5vmin;
+}
+
+div  {
+    font-family: 'Nobile';
+    font-size: 2.5vmin;
+	background:transparent;
+}
+
+/*Canvas Attributes*/
+.canvasContainer {
+    width: 100vw;
+    height: 75vh;
+    max-height: 75%;
+    max-width: 100%;
+	background:#58FAF4;
+}
+
+.svg-content-responsive {
+    display: block;
+    position: relative;
+    padding-top: 0%;
+    padding-bottom: 0%;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+	background:#58FAF4;
+}
+
+#chatContainer {
+	position: absolute;
+	top: 35%;
+	left:75.0%;
+	display: block;
+	width: 22.5%;
+	height: 27.5%;
+}
+
+#messages {
+	display: block;
+    width: 100%;
+    height: 70%;
+    border: 2px solid rgb(230, 230, 230);
+    margin: 0px 0px 5px 0px;
+	background-color: white;
+	
+	font-size: 15vmin;	
+		
+    word-wrap: break-all;
+	word-break: break-all;
+	
+	overflow-y: scroll;
+}
+
+#communicationInstructionsContainer {
+	position: absolute;
+	top: 23.5%;
+	left:75.0%;
+	display: block;
+	width: 22.5%;
+	height: 10.0%;
+	
+	font-size: 1.6vmin;
+}

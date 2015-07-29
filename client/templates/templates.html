@@ -1,0 +1,264 @@
+<template name="canvas">
+    <div style = "position: relative; width:100vw;height:75vh; max-height: 100%; max-width:100%;" id='canvas'></div>
+</template>
+
+<template name='selectColor'>
+	{{#if userIsALoggedInParticipant}}
+		{{#if colorButtonsVisible}}
+			Your Color: {{> button1}} {{> button2}}  
+		{{/if}}
+	{{/if}}
+</template>
+
+<template name="button1" >
+	<button id = "b1" style = "background-color: white; height: 7.5vh; width: 10vw;">Color 1</button>
+	<script language="javascript" type="text/javascript">
+		button1OnLoad();
+	</script>
+</template>
+
+<template name="button2">
+	<button id = "b2" style = "background-color: white; height: 7.5vh; width: 10vw;">Color 2</button>
+	<script language="javascript" type="text/javascript">
+		button2OnLoad();
+	</script>
+</template>
+
+<template name="adminControls">
+	{{#if userIsAdmin}}
+		{{> usersLoggedIn}}
+		{{> startGame}}
+		{{> downloadLog}}
+		{{> clearLog}}
+	{{/if}}
+</template>
+
+<template name="startGame">
+	<button style = "display: block;">Start the game!</button>
+</template>
+
+<template name="downloadLog">
+	<td><button onclick="saveTextAsFile()">Save log</button></td>
+</template>
+
+<template name="usersLoggedIn">
+	Users logged in: {{usersCount}}
+</template>
+
+<template name="clearLog">
+	<button style = "display: block;">Clear log</button>
+</template>
+
+<template name="currentName">
+	{{#if userIsALoggedInParticipant}}
+		{{#if nameVisible}}
+        <div align = "center" style = " position: absolute; padding-top:0%; display: block; top: 28.0%; left: 2.5vmin; 
+		              background-color: CornflowerBlue; border-style: ridge; border-style: solid; border-color: CornflowerBlue; 
+					  width: 37.0vmin; height: 13.75vmin;">
+           <div style = "line-height:100%; font-size: 10vmin;">{{yourNameIs}} </div>
+           <div style = "line-height:100%; font-size: 3vmin;">Your Name</div>
+        </div>
+		{{/if}}
+	{{/if}}
+</template>
+
+<template name="progressPercentage">
+	{{percentage}} 
+</template>
+
+<template name="timeRemaining">
+	{{time}}
+</template>
+
+<template name="payoutInformation">
+	{{#if userIsALoggedInParticipantOrAdmin}}
+		{{#if experimentInProgress}}
+			<div align = "center" style = " position: absolute; padding-top:0%; display: block; top: 18.0%; left: 2.5vmin; background-color: greenyellow; 
+			                                border-style: ridge; border-style: solid; border-color: #ADFF2F; width: 18vmin; height: 9vmin;">
+				{{#if userIsAdmin}}
+					<div style = "line-height: 100%; font-size: 6vmin; "> ${{totalPayout}} </div>
+					<div style = "line-height: 100%; font-size: 1.6vmin; ">Total Payout</div>
+				{{else}}
+					<div style = "line-height: 100%; font-size: 6vmin; "> ${{yourPayout}} </div>
+					<div style = "line-height: 100%; font-size: 1.6vmin; ">Your Total Payout</div>
+				{{/if}}
+            </div>
+		{{/if}}
+	{{/if}}
+</template>
+
+<template name="sessionPayoutInformation">
+	{{#if statusVisible}}
+			<div align = "center" style = " position: absolute; padding-top:0%; display: block; top: 18.0%; left: 21.5vmin; background-color: greenyellow; 
+			                                border-style: ridge; border-style: solid; border-color: #ADFF2F; width: 18vmin; height: 9vmin;">
+				{{#if userIsAdmin}}
+					<div style = "line-height: 100%; font-size: 6vmin; "> ${{totalSessionPayout}} </div>
+					<div style = "line-height: 100%; font-size: 1.6vmin; ">Total Session Payout</div>
+				{{else}}
+					<div style = "line-height: 100%; font-size: 6vmin; "> ${{yourSessionPayout}} </div>
+					<div style = "line-height: 100%; font-size: 1.6vmin; ">Your Session Payout</div>
+				{{/if}}
+            </div>
+	{{/if}}
+</template>
+
+<template name="potentialPayoutInformation">
+	{{#if userIsALoggedInParticipant}}
+		{{#if sessionInProgress}}
+			<div align = "center" style = " position: absolute; padding-top:0%; display: block; top: 59.0%; left: 2.5vmin; background-color: yellow; 
+			                                border-style: ridge; border-style: solid; border-color: yellow; width: 37.0vmin; height: 5vmin;">
+				Potential Payouts
+			</div>
+		{{/if}}
+	{{/if}}
+</template>
+
+<template name="potentialPayoutInformation1">
+	{{#if userIsALoggedInParticipant}}
+		{{#if sessionInProgress}}
+			<div id="potentialPayout1" align = "center" style = " position: absolute; padding-top:0%; display: block; top: 65.0%; left: 2.5vmin; background-color: greenyellow; 
+			                                border-style: ridge; border-style: solid; border-color: #ADFF2F; width: 18vmin; height: 9vmin;">
+				<div style = "line-height: 100%; font-size: 6vmin; "> ${{payout}} </div>
+				<div style = "line-height: 100%; font-size: 1.6vmin; ">for {{color}} consensus </div>
+			</div>
+			
+			<script language="javascript" type="text/javascript">
+				potentialPayout1OnLoad();
+			</script>
+		{{/if}}
+	{{/if}}
+</template>
+
+<template name="potentialPayoutInformation2">
+	{{#if userIsALoggedInParticipant}}
+		{{#if sessionInProgress}}
+			<div id="potentialPayout2" align = "center" style = " position: absolute; padding-top:0%; display: block; top: 65.0%; left: 21.5vmin; background-color: greenyellow; 
+			                                border-style: ridge; border-style: solid; border-color: #ADFF2F; width: 18vmin; height: 9vmin;">
+				<div style = "line-height: 100%; font-size: 6vmin; "> ${{payout}} </div>
+				<div style = "line-height: 100%; font-size: 1.6vmin; ">for {{color}} consensus </div>
+			</div>
+			
+			<script language="javascript" type="text/javascript">
+				potentialPayout2OnLoad();
+			</script>
+		{{/if}}
+	{{/if}}
+</template>
+
+<template name="chatBox">
+	{{#if messagingIsActive}}
+		{{#if userIsALoggedInParticipant}}
+			{{#if chatBoxVisible}}
+				<div id='messages'>
+				{{#each messages}}
+					{{> chatMessage}}
+				{{/each}}
+				</div>
+				<div align = "center" style="font-size: 1.25vmin; color:grey"> {{communicationLimit}} </div>
+				{{#if userIsNotAdmin}}
+					{{#if communicationIsStructured}}
+						<button class='btn btn-primary' id='reportButton'>Report Neighborhood Color Counts</button>
+					{{else}}
+						<textarea id='chat-message' style = "display: block; width: 100.0%; height: 20.0%; margin-bottom: 1vh;"
+							      onkeydown="sendMessageUsingEnterKey(event)"></textarea>
+						<button class='btn btn-primary' id='sendButton'>Send Message</button>
+					{{/if}}
+				{{/if}}
+			{{/if}}
+		{{/if}}
+	{{/if}}
+</template>
+
+<template name='chatMessage'>
+  <div>
+    <b>{{nameOfSender}}:</b> {{message}}
+  </div>
+</template>
+
+<template name='progressBars'>
+	{{#if userIsALoggedInParticipant}}
+		{{#if progressBarsVisible}}
+			<div id = "gameInfo" style = " position: absolute; padding-top:0%; display: block; width: 100%; top: 89.5%;">
+				<h7 style = "position: absolute; padding-top:0%; display: block; left: 2.5vmin; width: 11%"> Progress: </h7>
+			</div> 
+	 
+			<div id = "timeInfo" style = " position: absolute; padding-top:0%; display: block; width: 100%; top: 93.25%;">
+				<h7 style = "position: absolute; padding-top:0%; display: block; left: 2.5vmin; width: 11%"> Time Remaining: </h7>
+			</div>  
+	
+			<div class="progress" style = "position: absolute; padding-top:0%; display: block; left: 13.5%; top: 89.5%; width: 20%; text-align: center;">
+				<div id = "gameProgress" class="progress-bar active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+					<span style = "position: absolute; display: block; width: 100%; color: black;">{{> progressPercentage}}</span>
+				</div>
+			</div>
+    
+			<div class="progress" style = "position: absolute; padding-top:0%; display: block; left: 13.5%; top: 93.25%; width: 20%">
+				<div id = "timeProgress" class="progress-bar active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+					<span style = "position: absolute; display: block; width: 100%; color: black;">{{> timeRemaining}}</span>
+				</div>
+			</div>
+		{{/if}}
+	{{/if}}
+</template>
+
+<template name='waitForNextExperimentStatus'>
+	{{#if statusVisible}}
+		<div id="waitStatus" align = "center" style = " position: absolute; padding-top:0%; display: block; top: 40.0%; left: 30.0%; 
+									                    background-color: greenyellow; border-style: ridge; border-style: solid; border-color: #ADFF2F; 
+														width: 40vw; height: 20vh; font-size: 1.0vmin">
+			{{status}}
+		</div>
+	{{/if}}
+</template>
+
+<template name='signInStatus'>
+	{{#if statusVisible}}
+		<div id="signInStatus" align = "center" style = " position: absolute; padding-top:0%; display: block; top: 40.0%; left: 30.0%; 
+														  background-color: greenyellow; border-style: ridge; border-style: solid; 
+														  border-color: #ADFF2F; width: 40vw; height: 20vh; font-size: 1.0vmin">
+			Please sign in using the menu located in the top right corner.
+		</div>
+		
+		<script language="javascript" type="text/javascript">
+			$('#signInStatus').boxfit({multiline: true});
+		</script>
+		
+	{{/if}}
+</template>
+
+<template name="preSessionCountdown">
+	{{#if statusVisible}}
+			<div align = "center" style = " position: absolute; padding-top:0%; display: block; top: 42.5%; left: 2.5vmin; background-color: orange;
+						  border-style: ridge; border-style: solid; border-color: orange; width: 37.0vmin; height: 9vmin;">
+			    <div style = "line-height: 100%; font-size: 1.8vmin; ">{{statusDescription}}</div>
+				<div style = "line-height: 100%; font-size: 6vmin; ">{{status}}<span style = "font-size: 4.5vmin; ">s</span></div>
+			</div>
+    
+    {{/if}}
+</template>
+
+<template name="gameInProgressStatus">
+    {{#if statusVisible}}
+		<div align = "center" style = " position: absolute; padding-top:0%; display: block; top: 42.5%; left: 2.5vmin; background-color: orange;
+									    border-style: ridge; border-style: solid; border-color: orange; width: 37.0vmin; height: 9vmin;">
+			<div style = "line-height: 100%; font-size: 6vmin; "> {{status}} </div>
+			<div style = "line-height: 100%; font-size: 1.8vmin; ">is in progress</div>
+		</div>
+    {{/if}}
+</template>
+
+<template name="gameOutcomeStatus">
+    {{#if statusVisible}}
+		<div align = "center" style = " position: absolute; padding-top:0%; display: block; top: 42.5%; left: 2.5vmin; background-color: orange;
+									    border-style: ridge; border-style: solid; border-color: orange; width: 37.0vmin; height: 9vmin;">
+			<div style = "line-height: 100%; font-size: 6vmin; "> {{status}} </div>
+			<div style = "line-height: 100%; font-size: 1.8vmin; ">consensus was reached</div>
+		</div>
+    {{/if}}
+</template>
+
+<template name="communicationInstructions">
+    {{#if instructionsVisible}}
+		{{instructions}}
+    {{/if}}
+</template>
