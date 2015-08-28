@@ -68,14 +68,3 @@ div  {
 	
 	overflow-y: scroll;
 }
-
-#communicationInstructionsContainer {
-	position: absolute;
-	top: 23.5%;
-	left:75.0%;
-	display: block;
-	width: 22.5%;
-	height: 10.0%;
-	
-	font-size: 1.6vmin;
-}

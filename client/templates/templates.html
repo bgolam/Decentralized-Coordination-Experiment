@@ -257,8 +257,22 @@
     {{/if}}
 </template>
 
-<template name="communicationInstructions">
+<template name="communicationType">
     {{#if instructionsVisible}}
-		{{instructions}}
+    <div align = "center" style = " position: absolute; padding-top:0%; display: block; top: 15%; left:75.0%; background-color: orange;
+                                    border-style: ridge; border-style: solid; border-color: orange; width: 37.0vmin; height: 9vmin;">
+        <div style = "line-height: 100%; font-size: 6vmin; "> {{type}} </div>
+        <div style = "line-height: 100%; font-size: 1.8vmin; ">communication</div>
+    </div>
+    {{/if}}
+</template>
+
+<template name="communicationCost">
+    {{#if instructionsVisible}}
+    <div align = "center" style = " position: absolute; padding-top:0%; display: block; top: 25%; left:75.0%; background-color: orange;
+        border-style: ridge; border-style: solid; border-color: orange; width: 37.0vmin; height: 9vmin;">
+        <div style = "line-height: 100%; font-size: 6vmin; "> {{cost}} </div>
+        <div style = "line-height: 100%; font-size: 1.8vmin; ">communication</div>
+    </div>
     {{/if}}
 </template>

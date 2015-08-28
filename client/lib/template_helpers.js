@@ -662,60 +662,74 @@ Template.progressBars.helpers({
 	}
 });
 
-Template.communicationInstructions.helpers({
-	instructionsVisible: function() {
-		var response = false;
-		
-		var communication = parameters.findOne({type: "communication"});
-		if((communication !== undefined) && communication.value) {
-			if(userIsALoggedInParticipant()) {
-				sessionProgress = progressInfo.findOne({type: "sessionInProgress"});
-				postSessionProgress = progressInfo.findOne({type: "postSessionInProgress"});
-		
-				if((sessionProgress !== undefined) && (postSessionProgress !== undefined)) {
-					response = sessionProgress.value || postSessionProgress.value;
-				}
-			}
-		}
-		
-		return response;
-	},
-	instructions: function() {
-		var response = "";
-		
-		var costBasedCommunication = parameters.findOne({type: "costBasedCommunication"});
-		if(costBasedCommunication !== undefined) {
-			if(costBasedCommunication.value) {
-				response += "The communication is cost-based. Every time you send a message, your potential consensus payouts will be reduced.";
-			}
-			else {
-				response += "The communication is not cost-based.";
-			}
-		}
-		
-		var structuredCommunication = parameters.findOne({type: "structuredCommunication"});
-		if(structuredCommunication !== undefined) {
-			if(structuredCommunication.value) {
-				response += " You can communicate the current aggregate color counts in your neighborhood to other players," + 
-							" as long as the number of messages remaining is positive.";
-			}
-			else {
-				response += " You can type a message. The message length cannot exceed the number of characters currently remaining.";
-			}
-		}
-		
-		var globalCommunication = parameters.findOne({type: "globalCommunication"});
-		if(globalCommunication !== undefined) {
-			if(globalCommunication.value) {
-				response += " You can communicate with all players.";
-			}
-			else {
-				response += " You can only communicate with your neighbors.";
-			}
-		}
-		
-		return response;
-	}
+Template.communicationType.helpers({
+    instructionsVisible: function() {
+        var response = false;
+                                           
+        var communication = parameters.findOne({type: "communication"});
+        if((communication !== undefined) && communication.value) {
+            if(userIsALoggedInParticipant()) {
+                sessionProgress = progressInfo.findOne({type: "sessionInProgress"});
+                postSessionProgress = progressInfo.findOne({type: "postSessionInProgress"});
+                                           
+                if((sessionProgress !== undefined) && (postSessionProgress !== undefined)) {
+                    response = sessionProgress.value || postSessionProgress.value;
+                }
+            }
+        }
+                                           
+        return response;
+    },
+    type: function() {
+        var response = "";
+                                   
+        var globalCommunication = parameters.findOne({type: "globalCommunication"});
+            if(globalCommunication !== undefined) {
+                if(globalCommunication.value) {
+                    response += " GLOBAL";
+                }
+                else {
+                    response += " LOCAL";
+                }
+            }
+                                           
+        return response;
+    }
+});
+
+Template.communicationCost.helpers({
+    instructionsVisible: function() {
+        var response = false;
+                                   
+        var communication = parameters.findOne({type: "communication"});
+        if((communication !== undefined) && communication.value) {
+            if(userIsALoggedInParticipant()) {
+                sessionProgress = progressInfo.findOne({type: "sessionInProgress"});
+                postSessionProgress = progressInfo.findOne({type: "postSessionInProgress"});
+                                   
+                if((sessionProgress !== undefined) && (postSessionProgress !== undefined)) {
+                    response = sessionProgress.value || postSessionProgress.value;
+                }
+            }
+        }
+                                   
+        return response;
+    },
+    cost: function() {
+        var response = "";
+                                   
+        var costBasedCommunication = parameters.findOne({type: "costBasedCommunication"});
+        if(costBasedCommunication !== undefined) {
+            if(costBasedCommunication.value) {
+                response += "COST BASED";
+            }
+            else {
+                response += "FREE";
+            }
+        }
+                                   
+        return response;
+    }
 });
 
 // Technically not helpers, but allow us to dynamically change the background color and label of buttons.
