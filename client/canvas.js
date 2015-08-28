@@ -15,13 +15,14 @@ Canvas = function () {
   var viewBoxWidth = 1024,				// Specifying the internal coordinate system of the view  
 	  viewBoxHeight = 768;				// box.
   
-  var nodeRadius = viewBoxHeight / 13;							
-  var centerX = viewBoxWidth/2, 		// The coordinates of the center of the circle representing
+  var nodeRadius = viewBoxHeight / 19.5;
+  var centerX = viewBoxWidth/2.075, 		// The coordinates of the center of the circle representing
       centerY = viewBoxHeight/2;		// the node belonging to the current client.
   
   var primaryEdgeColor = "black",
 	  secondaryEdgeColor = "LightGrey",
       edgeWidth = 3.5,
+      edgeLengthMultipler = 10,
       nodeBorderColor = "black",
       textFont = "sans-serif",
       textSize = nodeRadius * 0.75,
@@ -44,14 +45,15 @@ Canvas = function () {
     if (svg) {
 		// self.clear();
 		numNodes = namesOfNeighbors.length;
+        edgeLengthMultipler = 4 + (numNodes - 3) / 2;
 		
 		// Initialize the central node (the one corresponding to the current client).
 		self.initializeNode(namesOfNeighbors[0], centerX, centerY);
 		
 		// Initialize the remaining nodes.
 		for(var i=1; i<numNodes; i++)
-			self.initializeNode(namesOfNeighbors[i], 5 * nodeRadius * Math.cos((Math.PI * 2 * i) / (numNodes-1)) + centerX,
-													 5 * nodeRadius * Math.sin((Math.PI * 2 * i) / (numNodes-1)) + centerY);
+			self.initializeNode(namesOfNeighbors[i], edgeLengthMultipler * nodeRadius * Math.cos((Math.PI * 2 * i) / (numNodes-1)) + centerX,
+													 edgeLengthMultipler * nodeRadius * Math.sin((Math.PI * 2 * i) / (numNodes-1)) + centerY);
 		
 		// Draw primary edges.
 		for(var j=1; j<numNodes; j++) {
@@ -93,7 +95,7 @@ Canvas = function () {
 	  var cosGamma = Math.abs(x2-x1)/hyp;
 	  
 	  var path = ("M " + x1 + " " + y1 + " C" + " " + x1 + " " + y1 + " " +
-	              (cx - 5 * nodeRadius * sinGamma) + " " + (cy + 5 * nodeRadius  * cosGamma) + " "+ x2 + " " + y2);
+	              (cx - edgeLengthMultipler * nodeRadius * sinGamma) + " " + (cy + edgeLengthMultipler * nodeRadius  * cosGamma) + " "+ x2 + " " + y2);
       svg.append("svg:path")
          .attr("d", path)
          .style("stroke-width", edgeWidth)
